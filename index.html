@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A repartir sardanes!</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAENUlEQVR4nO2Wu0tkSRTGv7p1+zpqd18frUIjBoIPBEVNXNRsDTrxH2gEUQydjdzJDAVHzExUEAMzzexAMfOBs4ns7KyIkYLvR+Qr2Xurvg2cWzvObe12ZmGS+eDS0FV16ndO1alzBEniB8r6kZv/BPgJAAD2ayaThNYalmVBCIHnEkgIkbdNkW8aBhsHUkpBSpnX3JeUVwR834dt27i8vMTGxga6urqQTCZxd3cH3/fNPJKQUsJ1XZDMLxLMId/3SZLb29ssKytjdXU1T05OODIyQtd1GY/HmUgkWFZWxkQiwUQiwZGREZKkUiqXeb4IEBhYWlpiYWEh29vbeX9/z8nJSUZjMVZWVtJ1XQIIfUdHR3lBPAvg+z611sxkMsbo2toab25u+PHjnzw6OuLBwQFPT085NzdH27YppaTjOBRCcGZmhlprep73bQABeUdHBwHQtm0WFRWxpKSEVVVVrKysNN/h4SFTqRQB0HEcAmAqlTKOvBpAqcdF+/v7jEQiFEJQCJE11I2Njby4uGB/fz8BMBKJEACLi4t5dnb2xJlH6dwAnvcPtdYcGxsz3gMwIFJKWpbF+vp6ZjLLnJ6e5qdPfzEej1MIYSDm5+dzHkMIQCnfLGhtbSUASimzeh+AAeDZ2RlbWlqeHENvby9J0ve9kOcvRoAklzPLL4besiwKIdjQ0MDV1VUeHx+zoKDAjAFgLBbj7e3t56hmj4IB0EpRa829vT2m02lKKXMCAGBPz6/s7+/n3t4e29vbzVgQtd/evjV3INuFNAAB4cDAQCi8z30BRE1NDc/Pz9nU1EQhhPk/+O3u7ubu7t/G0S8VerAdx4GUMuczGhSjiooKTE5OQkoLV1dXIGnqgNYaUkpsbW2ho+MXLC4uAkJAKWXshABIQin1bKX7UrZt4/r6Gul0Gm/eFGJtbQ3JZNLUDuCxaBUUFODh4QGZTCZURfPuB4QQEELAsizYtg2S8DwPdXV1yGQyiEajaGtrw+bmJpqbm+H7PiKRiIEQQiAajYbs5gSQUsKyLHy+L9BaP3oYieDdu9+xs7ODVCoF4LFq1tbWYn19HT09PfA8z0AEa/MGEEJASgmlFLTWcBwH5eXlqKurQzqdxh8fPuD9+wnEYjHjoW3bUEqhtLQUKysr6Ovrg+d55jiyKeuIlBKe5wEAOjs7MTo6ioaGerhuCeLx+JPztSzrSWMipTSXb2FhAclkEhMTE+b4Qvo6DYeGhkxqzc7OUuvwC+b7fs4yq7U2eT81NUUAHBwcfLIXSYYi4DgOhoaGMD4+jvLycpMVwSUMvMylwGPf9zE8PAzbtrG7u2vGzDx+lW83NzdwXRdA0IpJAPk3mdkU9I93d3eIxWJPQb8GCBZYloAQ/1/XrpWCJSUeH1EgcCoEwHybSRCviwxBhlv2vNvy71d2YPu/kHyLBF63Pjz3X3RZzs2wI/2yAAAAAElFTkSuQmCC">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #2d2d2d;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        .container { position: relative; }
+        #timer {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 1rem;
+        }
+        .dades {
+            background: #3d3d3d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .opcions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .opcio {
+            background-color: #4a4a4a;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+            text-align: left;
+        }
+        .opcio:hover {
+            background-color: #5a5a5a;
+            border-color: #ffcc00;
+        }
+        button {
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #feedback {
+            margin-top: 1rem;
+            font-weight: bold;
+            height: 1.5rem;
+        }
+
+        /* =========================================
+           MODE CLAR (Sobreescriptura dinàmica)
+           ========================================= */
+        body.light-mode {
+            background-color: #f0f2f5;
+            color: #111827;
+        }
+        body.light-mode .container {
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        body.light-mode .dades { background: #f3f4f6; }
+        body.light-mode .opcio { background-color: #e5e7eb; color: #111827; }
+        body.light-mode .opcio:hover { background-color: #d1d5db; border-color: #d97706; }
+        body.light-mode button { background-color: #d97706; color: #fff; }
+        
+        /* Sobreescriptura màgica d'estils en línia per no alterar l'HTML original */
+        body.light-mode [style*="#3d3d3d"], 
+        body.light-mode [style*="background-color: #333"] { background: #f3f4f6 !important; background-color: #f3f4f6 !important; }
+        body.light-mode [style*="#2d2d2d"] { background: #ffffff !important; background-color: #ffffff !important; }
+        body.light-mode [style*="#4a4a4a"],
+        body.light-mode [style*="#555"] { background-color: #e5e7eb !important; background: #e5e7eb !important; border-color: #d1d5db !important; color: #111827 !important; }
+        body.light-mode [style*="#5a5a5a"] { background-color: #d1d5db !important; background: #d1d5db !important; }
+        body.light-mode [style*="#4a5a4a"] { background: #dcfce7 !important; }
+        body.light-mode [style*="#5a3d00"] { background: #fef3c7 !important; background-color: #fef3c7 !important; }
+        
+        body.light-mode [style*="#e0e0e0"] { color: #111827 !important; }
+        body.light-mode [style*="#ccc"] { color: #4b5563 !important; }
+        body.light-mode [style*="#aaa"], body.light-mode [style*="#bbb"] { color: #6b7280 !important; }
+        body.light-mode [style*="#ffcc00"] { color: #d97706 !important; border-color: #d97706 !important; }
+        body.light-mode [style*="#00ff00"], body.light-mode [style*="#00ff99"] { color: #16a34a !important; }
+        body.light-mode [style*="#ff4444"] { color: #dc2626 !important; border-color: #dc2626 !important; }
+
+        /* Excepcions per als botons de xarxes socials i avisos, perquè mantinguin el color original */
+        body.light-mode button[style*="#25D366"],
+        body.light-mode button[style*="#000000"],
+        body.light-mode button[style*="#0088cc"],
+        body.light-mode button[style*="#d13038"],
+        body.light-mode button[style*="#00cc66"] { color: white !important; }
+        body.light-mode button[style*="#25D366"] { background-color: #25D366 !important; }
+        body.light-mode button[style*="#000000"] { background-color: #000000 !important; border-color: #111 !important; }
+        body.light-mode button[style*="#0088cc"] { background-color: #0088cc !important; }
+        body.light-mode button[style*="#d13038"] { background-color: #d13038 !important; }
+        body.light-mode button[style*="#00cc66"] { background-color: #16a34a !important; background: #16a34a !important; }
+        
+        body.light-mode button[style*="background: transparent"] { background: transparent !important; color: #d97706 !important; border-color: #d97706 !important; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="game-container">
+    <h1>A repartir sardanes!</h1>
+
+    <div id="hof-screen" style="display: none; text-align: left; width: 100%;">
+        <h2 style="color: #ffcc00; margin-top: 0; text-align: center;">🏆 Top100</h2>
+        <p style="font-size: 0.9rem; color: #aaa; text-align: center;">Classificació global de repartidors.</p>
+        <div id="hof-content"></div>
+        <button onclick="hideHallOfFame()" style="margin-top: 20px; width: 100%;">Tornar al Menú</button>
+    </div>
+
+    <div id="help-screen" style="display: none; text-align: left;">
+        <h2 id="help-title-normal" style="color: #ffcc00; margin-top: 0; text-align: center;">Com es calcula?</h2>
+        <div id="help-title-error" style="display: none; text-align: center;">
+            <h2 style="color: #ff4444; margin-top: 0;">Para, para, para, para...</h2>
+            <p>Has acumulat massa errades.</p>
+            <p style="color: #ffcc00; font-weight: bold;">No ho tens massa clar, oi?</p>
+        </div>
+        <div style="background: #3d3d3d; padding: 1rem; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; color: #e0e0e0; margin-top: 15px;">
+            <p style="margin-top: 0;">Agafes el mòdul 8 de la tirada. Calcules el mòdul 8 del proper canvi que porta a la banda de començament. Restes el segon resultat al primer (si surt negatiu sumes 8), i tindràs la quantitat de compassos que tindries a partir del darrer canvi cap a la banda d'inici.</p>
+            <p>Si és 2, 3 o 4, l'acabament és directe: <strong>un dos</strong>, <strong>un tres</strong> o <strong>un quatre</strong>. En canvi, si és 1, cal treure 2 compassos de la banda anterior al darrer canvi per sumar-los a la banda d'acabament i acabar amb un 3: <strong>un dos i un tres</strong>.</p>
+            <p>Si es 5, 6, 7 o 8, cal teure 4 compassos abans de fer el que tocaria si no volguéssim acabar a l'altra banda, i això, obliga a recuperar 4 compassos afegint 2 dosos:</p>
+            <ul style="margin-top: 5px; margin-bottom: 5px;">
+                <li>Si és 5: <strong>3 dosos i un 3</strong></li>
+                <li>Si és 6: <strong>2 dosos i un 2</strong></li>
+                <li>Si és 7: <strong>2 dosos i un 3</strong></li>
+                <li>Si és 8: <strong>2 dosos i un quatre</strong></li>
+            </ul>
+            <p>Si no tenim en compte la banda (primer nivell), canvies 8 per 4, i no caldrà afegir dosos.</p>
+            <p style="margin-bottom: 0;">Per trobar en quin compàs s'ha de dir l'acabament, sumes les xifres que dius, tenint en compte que cada dosos són 2 compassos. Per exemple, en 3 dosos i un 3, el compàs del canvi on caldrà dir l'acabament és 9 (3 dosos x 2 + 3) abans del darrer compàs.</p>
+        </div>
+        <button onclick="tornarAlMenu()" style="margin-top: 20px; width: 100%;">Tornar al Menú</button>
+        <button onclick="retirarConsentiment()" style="
+            margin-top: 10px;
+            width: 100%;
+            background-color: #5a3d00;
+            color: #ffcc00;
+        ">
+            🍪 Retirar consentiment de serveis externs
+        </button>        
+    </div>
+    
+    <div id="profiles-screen" style="display: none; text-align: left; width: 100%;">
+        <h2 style="color: #ffcc00; margin-top: 0; text-align: center;">👤 Perfils</h2>
+        
+        <div id="profiles-list" style="margin-bottom: 20px;"></div>
+
+        <div style="background: #3d3d3d; padding: 15px; border-radius: 8px;">
+            <h3 style="margin-top: 0; color: #e0e0e0; font-size: 1.1rem;">Nou Perfil</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.9rem; color: #ccc;">Nickname: <strong id="new-profile-nickname" style="color: #00ff00; margin-left: 5px;"></strong></span>
+                    <button onclick="rollNewProfileNickname()" style="background: transparent; border: 1px solid #ffcc00; padding: 5px 10px; font-size: 0.9rem; border-radius: 5px; color: #ffcc00; width: auto; cursor: pointer;">🎲 Re-roll</button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="new-profile-comarca" style="font-size: 0.9rem; color: #ccc;">🌍 Comarca:</label>
+                    <select id="new-profile-comarca" style="padding: 5px; border-radius: 5px; background: #2d2d2d; color: #e0e0e0; border: none; font-size: 0.9rem; width: 60%;"></select>
+                </div>
+                <button onclick="createNewProfile()" style="background-color: #00ff00; color: #1e1e1e; padding: 10px; width: 100%; font-weight: bold; border-radius: 8px;">Crear i Seleccionar</button>
+            </div>
+        </div>
+
+        <button onclick="hideProfiles()" style="margin-top: 20px; width: 100%; background-color: #4a4a4a; color: #e0e0e0;">Tornar al Menú</button>
+    </div>
+
+    <div id="start-screen">
+        <div style="background: #3d3d3d; padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.95rem; color: #ccc;">👤 Jugador: <strong id="current-nickname" style="color: #00ff00; font-size: 1.1rem; margin-left: 5px;"></strong></span>
+            <button onclick="showProfiles()" style="background: transparent; border: 1px solid #ffcc00; padding: 5px 15px; font-size: 0.9rem; border-radius: 5px; color: #ffcc00; width: auto; cursor: pointer;">⚙️ Perfils</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <p style="margin: 0;">Tria dificultat (<span id="temps-limit-text"></span> segons):</p>
+            <div style="display: flex; gap: 5px;">
+                <button id="theme-toggle" onclick="toggleTheme()" style="background: #4a4a4a; padding: 5px 10px; font-size: 1rem; width: auto; color: #e0e0e0; border-radius: 5px;" title="Canviar Tema">🌞 Clar</button>
+                <button onclick="showHelp()" style="background: #4a4a4a; padding: 5px 15px; font-size: 1rem; width: auto; color: #ffcc00; border-radius: 5px;">❓ Ajuda</button>
+            </div>
+        </div>
+        <div id="nivells-menu" style="display: flex; flex-direction: column; gap: 10px;">
+        </div>
+        <div id="high-scores" style="margin-top: 20px; font-size: 0.9rem; color: #aaa;">
+            <h3 style="color: #e0e0e0; margin-bottom: 5px;">Rècords de jugador i Top100 global</h3>
+            <table style="width: 100%; border-collapse: collapse; text-align: center; margin-top: 10px;">
+                <tr>
+                    <th style="padding: 5px; border-bottom: 1px solid #555;">Niv. A</th>
+                    <th style="padding: 5px; border-bottom: 1px solid #555;">Niv. B</th>
+                    <th style="padding: 5px; border-bottom: 1px solid #555;">Niv. C</th>
+                    <th style="padding: 5px; border-bottom: 1px solid #555;">Niv. D</th>
+                    <th style="padding: 5px; border-bottom: 1px solid #555;">Niv. E</th>
+                </tr>
+                <tr>
+                    <td style="padding: 5px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <span id="hs-A" style="color: #ffcc00; font-weight: bold;">0</span>
+                            <span onclick="showHallOfFame('A')" title="Top100 Nivell A" style="cursor: pointer; font-size: 1.1rem;">🏆</span>
+                        </div>
+                    </td>
+                    <td style="padding: 5px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <span id="hs-B" style="color: #ffcc00; font-weight: bold;">0</span>
+                            <span onclick="showHallOfFame('B')" title="Top100 Fame Nivell B" style="cursor: pointer; font-size: 1.1rem;">🏆</span>
+                        </div>
+                    </td>
+                    <td style="padding: 5px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <span id="hs-C" style="color: #ffcc00; font-weight: bold;">0</span>
+                            <span onclick="showHallOfFame('C')" title="Top100 Fame Nivell C" style="cursor: pointer; font-size: 1.1rem;">🏆</span>
+                        </div>
+                    </td>
+                    <td style="padding: 5px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <span id="hs-D" style="color: #ffcc00; font-weight: bold;">0</span>
+                            <span onclick="showHallOfFame('D')" title="Top100 Fame Nivell D" style="cursor: pointer; font-size: 1.1rem;">🏆</span>
+                        </div>
+                    </td>
+                    <td style="padding: 5px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <span id="hs-E" style="color: #ffcc00; font-weight: bold;">0</span>
+                            <span onclick="showHallOfFame('E')" title="Top100 Fame Nivell E" style="cursor: pointer; font-size: 1.1rem;">🏆</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Secció de Monetització / Donacions -->
+        <div id="donation-section" style="margin-top: 25px; text-align: center;">
+            <a href="https://pereerro.aixeta.cat/" target="_blank" style="text-decoration: none;">
+                <button style="background-color: #d13038; color: white; border: none; padding: 12px 20px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: filter 0.2s;" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='brightness(1)'">
+                    💧 Dona suport via L'Aixeta
+                </button>
+            </a>
+
+        <button onclick="copiarEnllacJoc(this)" style="margin-top: 15px; background-color: #4a4a4a; color: #e0e0e0; border: none; padding: 10px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; width: 100%; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#5a5a5a'" onmouseout="this.style.backgroundColor='#4a4a4a'">
+            🔗 Copiar enllaç per compartir el joc
+        </button>
+        </div>
+    </div>
+
+    <div id="game-screen" style="display: none;">
+        <div style="
+            display:flex;
+            align-items:flex-start;
+            gap:10px;
+            margin-bottom:15px;
+        ">
+            <div id="level-info"
+                style="
+                    flex:1;
+                    font-size:0.95rem;
+                    color:#ccc;
+                    line-height:1.4;
+                    background-color:#333;
+                    padding:10px;
+                    border-radius:8px;
+                ">
+            </div>
+
+            <button onclick="abandonarPartida()"
+                    title="Abandonar partida"
+                    style="
+                        width:auto;
+                        padding:10px 12px;
+                        font-size:1.3rem;
+                        background:#5a3d00;
+                        color:#ffcc00;
+                    ">
+                🚪
+            </button>
+        </div>
+        <div id="sub-task" style="color: #ffcc00; font-weight: bold; margin-bottom: 5px; display: none;">
+            PAS 2: Tria el valor de 'dir en canvi'
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 1rem;">
+            <div id="timer" style="margin-bottom: 0;"></div>
+            <div id="score-display" style="font-size: 2rem; font-weight: bold; color: #e0e0e0;">Punts: 0</div>
+        </div>
+        <div id="feedback"></div>
+        <div class="dades" id="dades-text"></div>
+        <div class="opcions" id="opcions-list"></div>
+        <p id="helper-text" style="font-size: 0.8rem; color: #888; margin-top: 20px;">Pots usar les tecles 1-8</p>
+    </div>
+
+    <!-- Nova pantalla de FINAL DE PARTIDA -->
+    <div id="game-over-screen" style="display: none; text-align: center; width: 100%;">
+        <div id="game-over-content" style="background: #3d3d3d; padding: 20px; border-radius: 8px; margin-bottom: 20px; line-height: 1.4;"></div>
+        
+        <div style="margin-top: 15px; text-align: center;">
+            <p style="margin-bottom: 8px; color: #ccc; font-size: 0.95rem;">Comparteix els teus rècords:</p>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <button onclick="shareScore('whatsapp')" style="background-color: #25D366; color: white; padding: 8px 12px; font-size: 0.9rem; flex: 1; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">WhatsApp</button>
+                <button onclick="shareScore('twitter')" style="background-color: #000000; color: white; padding: 8px 12px; font-size: 0.9rem; flex: 1; border-radius: 5px; border: 1px solid #333; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">X (Twitter)</button>
+                <button onclick="shareScore('telegram')" style="background-color: #0088cc; color: white; padding: 8px 12px; font-size: 0.9rem; flex: 1; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">Telegram</button>
+                <button onclick="shareScore('clipboard')" style="background-color: #555; color: white; padding: 8px 12px; font-size: 0.9rem; flex: 0 0 auto; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);" title="Copiar text al porta-retalls">📋</button>
+            </div>
+        </div>
+
+        <button onclick="tornarAlMenu()" style="margin-top: 20px; width: 100%; background-color: #4a4a4a; color: #e0e0e0;">Tornar al Menú</button>
+    </div>
+
+</div>
+<!-- =========================
+     BANNER COOKIES / PRIVACITAT
+     Afegir just abans de </body>
+========================= -->
+
+<div id="cookie-banner" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #2d2d2d;
+    color: #e0e0e0;
+    border-top: 2px solid #ffcc00;
+    padding: 20px;
+    z-index: 99999;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    display: none;
+">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <h3 style="margin-top: 0; color: #ffcc00;">
+            🍪 Privacitat i emmagatzematge
+        </h3>
+
+        <p style="line-height: 1.5; margin-bottom: 15px;">
+            Aquesta aplicació usa emmagatzematge local per guardar perfils i rècords,
+            i serveis de Google Firebase/reCAPTCHA per publicar puntuacions globals
+            i protegir el servei contra abusos.
+        </p>
+
+        <p style="font-size: 0.9rem; color: #bbb; margin-bottom: 20px;">
+            Si rebutges el permís, podràs continuar jugant en mode local,
+            però el Top100 global i les funcionalitats al núvol quedaran desactivades.
+        </p>
+
+        <div style="
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        ">
+            <button id="accept-cookies-btn" style="
+                background: #00cc66;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                flex: 1;
+                min-width: 180px;
+            ">
+                ✅ Acceptar
+            </button>
+
+            <button id="reject-cookies-btn" style="
+                background: #555;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                flex: 1;
+                min-width: 180px;
+            ">
+                ❌ Continuar en local
+            </button>
+        </div>
+
+        <details style="margin-top: 15px;">
+            <summary style="cursor: pointer; color: #ffcc00;">
+                Més informació
+            </summary>
+
+            <div style="
+                margin-top: 10px;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                color: #ccc;
+                background: #3d3d3d;
+                padding: 12px;
+                border-radius: 8px;
+            ">
+                <strong>Què es guarda?</strong>
+                <ul>
+                    <li>Perfils i rècords locals (localStorage)</li>
+                    <li>Nickname, comarca i puntuacions globals (Firebase)</li>
+                    <li>Identificador anònim tècnic</li>
+                </ul>
+
+                <strong>Serveis utilitzats:</strong>
+                <ul>
+                    <li>Google Firebase</li>
+                    <li>Google reCAPTCHA v3</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+        getAuth,
+        signInAnonymously,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        query,
+        where,
+        orderBy,
+        limit,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-check.js";
+
+            // ===============================
+            // PRIVACITAT / CONSENTIMENT
+            // ===============================
+
+            const COOKIE_KEY = "repartirCookieConsent";
+
+            function getCookieConsent() {
+                return localStorage.getItem(COOKIE_KEY);
+            }
+
+            function setCookieConsent(value) {
+                localStorage.setItem(COOKIE_KEY, value);
+            }
+
+            function showCookieBanner() {
+                document.getElementById("cookie-banner").style.display = "block";
+            }
+
+            function hideCookieBanner() {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+
+            document.getElementById("accept-cookies-btn").onclick = async () => {
+                setCookieConsent("accepted");
+                hideCookieBanner();
+
+                await initFirebaseServices();
+
+                console.log("Consentiment acceptat");
+            };
+
+            document.getElementById("reject-cookies-btn").onclick = () => {
+                setCookieConsent("rejected");
+                hideCookieBanner();
+                mostrarAvisModeLocal();
+                console.log("Mode local activat");
+            };
+
+            // ===============================
+            // FIREBASE
+            // ===============================
+
+            const firebaseConfig = {
+            apiKey: "AIzaSyAZQnEAG8JS4oQ8tw7CIuGb-XsvJw7xql8",
+            authDomain: "a-repartir-sardanes.firebaseapp.com",
+            projectId: "a-repartir-sardanes",
+            storageBucket: "a-repartir-sardanes.firebasestorage.app",
+            messagingSenderId: "1019529477636",
+            appId: "1:1019529477636:web:3ad33bfa32110e63b97f51",
+            measurementId: "G-PM1ZRL54BV"
+            };
+
+            let FIREBASE_ACTIU = false;
+            let db = null;
+            let authReadyPromise = null;
+
+            async function initFirebaseServices() {
+                try {
+                    const app = initializeApp(firebaseConfig);
+
+                    initializeAppCheck(app, {
+                        provider: new ReCaptchaV3Provider(
+                            "6LdQX-wsAAAAAEJ9Voa7HG8pBmmeQY-WQiMP_5ON"
+                        ),
+                        isTokenAutoRefreshEnabled: true
+                    });
+
+                    const auth = getAuth(app);
+
+                    authReadyPromise = new Promise((resolve, reject) => {
+                        const unsubscribe = onAuthStateChanged(auth, user => {
+                            if (user) {
+                                unsubscribe();
+                                resolve(user);
+                            }
+                        });
+
+                        signInAnonymously(auth).catch(reject);
+                    });
+
+                    db = getFirestore(app);
+
+                    FIREBASE_ACTIU = true;
+
+                    console.log("Firebase inicialitzat correctament");
+
+                } catch (error) {
+                    console.error("Error inicialitzant Firebase:", error);
+                }
+            }
+
+            // ===============================
+            // ARRANCADA
+            // ===============================
+
+            const consent = getCookieConsent();
+
+            if (!consent) {
+                showCookieBanner();
+            } else if (consent === "accepted") {
+                initFirebaseServices();
+            }
+
+    const ACABAMENTS = [
+        null,
+        ['un 2 i un 3', 5],
+        ['un 2', 2],
+        ['un 3', 3],
+        ['un 4', 4],
+        ['3 dosos i un 3', 9],
+        ['2 dosos i un 2', 6],
+        ['2 dosos i un 3', 7],
+        ['2 dosos i un quatre', 8]
+    ];
+    const TEMPS_LIMIT = 60;
+
+    const DESCRIPCIONS_NIVELL = {
+        'A': "🟢 Llargs sense banda<br><span style='font-size: 0.85rem;'>Encerta l'acabament.</span>",
+        'B': "🟡 Llargs amb banda<br><span style='font-size: 0.85rem;'>Cal acabar en la banda d'inici'.</span>",
+        'C': "🟠 Llargs amagant números<br><span style='font-size: 0.85rem;'>Les dades desapareixen. Memòria!</span>",
+        'D': "🔴 Llargs expert<br><span style='font-size: 0.85rem;'>Com si estiguessis repartint a una colla.</span>",
+        'E': "💀 Llargs mestre<br><span style='font-size: 0.85rem;'>Per als que es consideren experts.</span>"
+    };
+
+    const NOMS_NICK = ["Sardanista", "Tenora", "Tible", "Flabiol", "Fiscorn", "Contrabaix", "Dansaire", "Colla", "Espardenya", "Compàs"];
+    const ADJ_NICK = ["Expert", "Ràpid", "Alegre", "Ferm", "Llest", "Màgic", "Rítmic", "Valent", "Savi", "Àgil"];
+
+    const COMARQUES = [
+        "Sense especificar", "Alacantí", "Alcalatén", "Alcoià", "Alt Camp", "Alt Empordà", "Alt Maestrat", "Alt Millars", 
+        "Alt Palància", "Alt Penedès", "Alt Urgell", "Alt Vinalopó", "Alta Cerdanya", "Alta Ribagorça", "Andorra", "Anoia", 
+        "Bages", "Baix Camp", "Baix Ebre", "Baix Empordà", "Baix Llobregat", "Baix Maestrat", "Baix Penedès", "Baix Segura", 
+        "Baix Vinalopó", "Baixa Cerdanya", "Barcelonès", "Berguedà", "Camp de Morvedre", "Camp de Túria", "Canal de Navarrés", 
+        "Capcir", "Comtat", "Conca de Barberà", "Conflent", "Costera", "Eivissa", "Foia de Bunyol", "Formentera", "Garraf", 
+        "Garrigues", "Garrotxa", "Gironès", "Horta Nord", "Horta Oest", "Horta Sud", "Mallorca", "Maresme", "Marina Alta", 
+        "Marina Baixa", "Menorca", "Moianès", "Montsià", "Noguera", "Osona", "Pallars Jussà", "Pallars Sobirà", "Pla de l'Estany", 
+        "Pla d'Urgell", "Plana Alta", "Plana Baixa", "Ports", "Priorat", "Racó d'Ademús", "Requena-Utiel", "Ribera Alta", 
+        "Ribera Baixa", "Ribera d'Ebre", "Ripollès", "Rosselló", "Safor", "Segarra", "Segrià", "Selva", "Serrans", "Solsonès", 
+        "Tarragonès", "Terra Alta", "Urgell", "Val d'Aran", "València", "Vall d'Albaida", "Vall de Cofrents", "Vallès Occidental", 
+        "Vallès Oriental", "Vallespir", "Vinalopó Mitjà"
+    ];
+
+    let tempsRestant = TEMPS_LIMIT;
+    let puntuacio = 0;
+    let resultatCorrecteIndex = -1;
+    let valorDirCorrecte = -1;
+    let jocActiu = false;
+    let tiraActualValor = 0;
+    let timerInterval;
+    let dificultat = 'A';
+    let faseC = 1; // 1: triar acabament, 2: triar dir_en_canvi
+    let hintTimeouts = [];
+
+    function clearHints() {
+        hintTimeouts.forEach(t => clearTimeout(t));
+        hintTimeouts = [];
+    }
+
+    // --- GESTIÓ DEL PERFIL / NICKNAME ---
+    function generarPerfilAleatori() {
+        return {
+            w1: NOMS_NICK[Math.floor(Math.random() * NOMS_NICK.length)],
+            w2: ADJ_NICK[Math.floor(Math.random() * ADJ_NICK.length)],
+            num: Math.floor(Math.random() * 900) + 100, // 100-999
+            comarca: "Sense especificar"
+        };
+    }
+
+    function getNicknameComplet(profile) {
+        return `${profile.w1}_${profile.w2}_${profile.num.toString().padStart(3, '0')}`;
+    }
+
+    function getProfiles() {
+        let profiles = null;
+        try {
+            profiles = JSON.parse(localStorage.getItem('repartirProfiles'));
+        } catch (e) {
+            console.warn("Dades corruptes detectades a localStorage. S'intentarà recuperar.");
+        }
+        
+        if (!profiles || !Array.isArray(profiles) || profiles.length === 0) {
+            profiles = [];
+            let oldProfile = null;
+            let oldScores = {A: 0, B: 0, C: 0, D: 0, E: 0};
+            try {
+                oldProfile = JSON.parse(localStorage.getItem('repartirProfile'));
+                oldScores = JSON.parse(localStorage.getItem('repartirPuntuacions')) || oldScores;
+            } catch (e) {}
+            
+            if (oldProfile) {
+                profiles.push({
+                    id: "default",
+                    w1: oldProfile.w1,
+                    w2: oldProfile.w2,
+                    num: oldProfile.num,
+                    comarca: oldProfile.comarca || "Sense especificar",
+                    scores: oldScores
+                });
+                localStorage.setItem('repartirActiveProfileId', "default");
+            } else {
+                let initial = {
+                    id: Date.now().toString(),
+                    ...generarPerfilAleatori(),
+                    scores: {A: 0, B: 0, C: 0, D: 0, E: 0}
+                };
+                profiles.push(initial);
+                localStorage.setItem('repartirActiveProfileId', initial.id);
+            }
+            localStorage.setItem('repartirProfiles', JSON.stringify(profiles));
+        }
+        return profiles;
+    }
+
+    function getActiveProfile() {
+        let profiles = getProfiles();
+        let activeId = localStorage.getItem('repartirActiveProfileId');
+        let active = profiles.find(p => String(p.id) === String(activeId));
+        if (!active && profiles.length > 0) {
+            active = profiles[0];
+            localStorage.setItem('repartirActiveProfileId', active.id);
+        } else if (!active) {
+            active = {
+                id: "default",
+                ...generarPerfilAleatori(),
+                scores: {A: 0, B: 0, C: 0, D: 0, E: 0}
+            };
+            profiles.push(active);
+            localStorage.setItem('repartirProfiles', JSON.stringify(profiles));
+            localStorage.setItem('repartirActiveProfileId', active.id);
+        }
+        return active;
+    }
+
+    function showProfiles() {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('profiles-screen').style.display = 'block';
+        renderProfilesList();
+        rollNewProfileNickname();
+    }
+
+    function hideProfiles() {
+        document.getElementById('profiles-screen').style.display = 'none';
+        document.getElementById('start-screen').style.display = 'block';
+        initProfile();
+    }
+
+    function renderProfilesList() {
+        const profilesList = document.getElementById('profiles-list');
+        const profiles = getProfiles();
+        const activeId = localStorage.getItem('repartirActiveProfileId');
+
+        let html = '';
+        profiles.forEach(p => {
+            const isActive = p.id === activeId;
+            const bg = isActive ? '#4a5a4a' : '#3d3d3d';
+            const border = isActive ? '1px solid #00ff00' : '1px solid transparent';
+            
+            html += `
+                <div style="background: ${bg}; border: ${border}; padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="color: ${isActive ? '#00ff00' : '#e0e0e0'}; font-weight: bold; font-size: 1.05rem;">${getNicknameComplet(p)}</div>
+                        <div style="font-size: 0.85rem; color: #aaa; margin-top: 2px;">${p.comarca}</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        ${!isActive ? `<button onclick="selectProfile('${p.id}')" style="background: #2d2d2d; border: 1px solid #ffcc00; color: #ffcc00; padding: 5px 10px; font-size: 0.85rem; border-radius: 5px; cursor: pointer;">Seleccionar</button>` : `<span style="font-size: 0.85rem; color: #00ff00; padding: 5px; display: flex; align-items: center;">Actiu</span>`}
+                        ${profiles.length > 1 ? `<button onclick="deleteProfile('${p.id}')" style="background: #2d2d2d; border: 1px solid #ff4444; color: #ff4444; padding: 5px 10px; font-size: 1rem; border-radius: 5px; cursor: pointer;">🗑</button>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        profilesList.innerHTML = html;
+    }
+
+    function selectProfile(id) {
+        localStorage.setItem('repartirActiveProfileId', id);
+        renderProfilesList();
+    }
+
+    function deleteProfile(id) {
+        if (!confirm("Vols esborrar aquest perfil i els seus rècords?")) return;
+        let profiles = getProfiles();
+        profiles = profiles.filter(p => p.id !== id);
+        localStorage.setItem('repartirProfiles', JSON.stringify(profiles));
+        
+        const activeId = localStorage.getItem('repartirActiveProfileId');
+        if (activeId === id && profiles.length > 0) {
+            localStorage.setItem('repartirActiveProfileId', profiles[0].id);
+        }
+        renderProfilesList();
+    }
+
+    let tempNewProfile = null;
+    function rollNewProfileNickname() {
+        tempNewProfile = generarPerfilAleatori();
+        document.getElementById('new-profile-nickname').innerText = getNicknameComplet(tempNewProfile);
+    }
+
+    function createNewProfile() {
+        if (!tempNewProfile) rollNewProfileNickname();
+
+        const comarca = document.getElementById('new-profile-comarca').value;
+        const newP = {
+            id: Date.now().toString(),
+            w1: tempNewProfile.w1,
+            w2: tempNewProfile.w2,
+            num: tempNewProfile.num,
+            comarca: comarca,
+            scores: {A: 0, B: 0, C: 0, D: 0, E: 0}
+        };
+        const profiles = getProfiles();
+        profiles.push(newP);
+        localStorage.setItem('repartirProfiles', JSON.stringify(profiles));
+        localStorage.setItem('repartirActiveProfileId', newP.id);
+        
+        hideProfiles();
+    }
+
+    function omplirComarques() {
+        const comarcaSelect = document.getElementById('new-profile-comarca');
+        if (comarcaSelect.options.length === 0) {
+            COMARQUES.forEach(comarca => {
+                const option = document.createElement('option');
+                option.value = comarca;
+                option.textContent = comarca;
+                comarcaSelect.appendChild(option);
+            });
+        }
+    }
+
+    function initProfile() {
+        omplirComarques();
+        const profile = getActiveProfile();
+        document.getElementById('current-nickname').innerText = getNicknameComplet(profile);
+        mostrarHighScores();
+    }
+
+    async function obtenirTop100Nivell(nivell) {
+        if (!FIREBASE_ACTIU || !db) {
+            return [];
+        }
+
+        const q = query(
+            collection(db, "puntuacions"),
+            where("nivell", "==", nivell),
+            orderBy("punts", "desc"),
+            limit(100)
+        );
+
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+    }
+
+    function puntuacioEntraAlTop100(punts, top100) {
+        if (top100.length < 100) return true;
+
+        const pitjorPuntuacioTop100 = top100[top100.length - 1].punts ?? 0;
+        return punts > pitjorPuntuacioTop100;
+    }
+
+    async function enviarPuntuacioGlobal(nivell, nom, comarca, punts) {
+        if (!FIREBASE_ACTIU || !db) {
+            console.warn("[Firebase no configurat] Puntuació no enviada al núvol:", { nivell, nom, comarca, punts });
+            return false;
+        }
+
+        if (punts <= 0) {
+            console.log("[Firebase] Puntuació zero o negativa no s'envia.");
+            return false;
+        }
+
+        try {
+            const top100 = await obtenirTop100Nivell(nivell);
+
+            if (!puntuacioEntraAlTop100(punts, top100)) {
+                console.log(`[Firebase] La puntuació ${punts} no entra al Top 100 del Nivell ${nivell}. No s'envia.`);
+                return false;
+            }
+
+            const user = await authReadyPromise;
+
+            await addDoc(collection(db, "puntuacions"), {
+                nivell,
+                nom,
+                comarca,
+                punts,
+                ownerUid: user.uid,
+                createdAt: serverTimestamp()
+            });
+
+            console.log(`[Firebase] Enviat correctament: ${nom} (${comarca}) -> ${punts} punts (Nivell ${nivell})`);
+            return true;
+        } catch (error) {
+            console.error("Error comprovant o enviant la puntuació a Firebase:", error);
+            return false;
+        }
+    }
+
+    async function carregarHallOfFame(nivell) {
+        return await obtenirTop100Nivell(nivell);
+    }
+
+    function renderHallOfFame(files, nivell) {
+        const hofContent = document.getElementById("hof-content");
+
+    if (!FIREBASE_ACTIU) {
+        hofContent.innerHTML = `
+            <div style="background: #3d3d3d; padding: 1rem; border-radius: 8px; color: #ffcc00;">
+                ⚠️ El Top100 global està desactivat en mode local.<br><br>
+                Accepta els serveis externs per veure i enviar puntuacions globals.
+            </div>
+        `;
+        return;
+    }
+        if (!files.length) {
+            hofContent.innerHTML = `
+                <div style="background: #3d3d3d; padding: 1rem; border-radius: 8px;">
+                    Encara no hi ha puntuacions al Top100 del Nivell ${nivell}.
+                </div>
+            `;
+            return;
+        }
+
+        let html = `
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                <thead>
+                    <tr>
+                        <th style="padding: 6px; border-bottom: 1px solid #555;">#</th>
+                        <th style="padding: 6px; border-bottom: 1px solid #555;">Jugador</th>
+                        <th style="padding: 6px; border-bottom: 1px solid #555;">Punts</th>
+                        <th style="padding: 6px; border-bottom: 1px solid #555;">Comarca</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        files.forEach((fila, index) => {
+            html += `
+                <tr>
+                    <td style="padding: 6px; color: #ffcc00;">${index + 1}</td>
+                    <td style="padding: 6px;">${fila.nom || "-"}</td>
+                    <td style="padding: 6px; font-weight: bold; color: #00ff00;">${fila.punts ?? 0}</td>
+                    <td style="padding: 6px;">${fila.comarca || "Sense especificar"}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+            </table>
+        `;
+
+        hofContent.innerHTML = html;
+    }
+
+    async function showHallOfFame(nivell) {
+        document.getElementById("start-screen").style.display = "none";
+        document.getElementById("hof-screen").style.display = "block";
+        document.querySelector("#hof-screen h2").innerText = `🏆 Top100 - Nivell ${nivell}`;
+        document.getElementById("hof-content").innerHTML = "Carregant classificació...";
+
+        try {
+            const files = await carregarHallOfFame(nivell);
+            renderHallOfFame(files, nivell);
+        } catch (error) {
+            console.error("Error carregant el Top100:", error);
+            document.getElementById("hof-content").innerHTML = `
+                <div style="background: #3d3d3d; padding: 1rem; border-radius: 8px; color: #ff4444;">
+                    No s'ha pogut carregar el Top100 del Nivell ${nivell}.
+                </div>
+            `;
+        }
+    }
+
+    function hideHallOfFame() {
+        document.getElementById("hof-screen").style.display = "none";
+        document.getElementById("start-screen").style.display = "block";
+    }
+
+    function scrollToBottom() {
+        // Un petit retard ajuda a assegurar que el DOM s'ha actualitzat abans de desplaçar-se
+        setTimeout(() => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 100);
+    }
+
+    function updateScoreDisplay() {
+        const scoreEl = document.getElementById('score-display');
+        scoreEl.innerText = "Punts: " + puntuacio;
+        scoreEl.style.color = puntuacio < 0 ? "#ff4444" : (puntuacio > 0 ? "#00ff00" : "#e0e0e0");
+    }
+
+    // Actualitzem els textos de la interfície amb el valor de la constant
+    document.getElementById('temps-limit-text').innerText = TEMPS_LIMIT;
+    document.getElementById('timer').innerText = TEMPS_LIMIT + "s";
+
+    const nivellsMenu = document.getElementById('nivells-menu');
+    for (const [nivell, desc] of Object.entries(DESCRIPCIONS_NIVELL)) {
+        const btn = document.createElement('button');
+        btn.onclick = () => startGame(nivell);
+        btn.style.textAlign = 'left';
+        btn.style.lineHeight = '1.4';
+        btn.innerHTML = desc;
+        nivellsMenu.appendChild(btn);
+    }
+
+    function getHighScores() {
+        const active = getActiveProfile();
+        const parsed = active.scores || {};
+        return {
+            A: Number(parsed.A) || 0,
+            B: Number(parsed.B) || 0,
+            C: Number(parsed.C) || 0,
+            D: Number(parsed.D) || 0,
+            E: Number(parsed.E) || 0
+        };
+    }
+
+    function saveHighScores(scores) {
+        const activeId = localStorage.getItem('repartirActiveProfileId');
+        let profiles = getProfiles();
+        let activeIndex = profiles.findIndex(p => String(p.id) === String(activeId));
+        if (activeIndex !== -1) {
+            profiles[activeIndex].scores = { ...profiles[activeIndex].scores, ...scores };
+            localStorage.setItem('repartirProfiles', JSON.stringify(profiles));
+        }
+    }
+
+    function mostrarHighScores() {
+        const scores = getHighScores();
+        document.getElementById('hs-A').innerText = scores.A;
+        document.getElementById('hs-B').innerText = scores.B;
+        document.getElementById('hs-C').innerText = scores.C;
+        document.getElementById('hs-D').innerText = scores.D;
+        document.getElementById('hs-E').innerText = scores.E;
+    }
+    
+    function shareScore(network) {
+        const scores = getHighScores();
+        // Agafem l'URL actual del navegador perquè l'enllaç funcioni independentment d'on estigui penjat el joc
+        const urlJoc = window.location.href.split('?')[0]; 
+        
+        const text = `He aconseguit aquests rècords a "A repartir sardanes!":\n\n` +
+                     `🟢 Niv. A: ${scores.A} punts\n` +
+                     `🟡 Niv. B: ${scores.B} punts\n` +
+                     `🟠 Niv. C: ${scores.C} punts\n` +
+                     `🔴 Niv. D: ${scores.D} punts\n` +
+                     `💀 Niv. E: ${scores.E} punts\n\n` +
+                     `Supera'm a: ${urlJoc}`;
+                     
+        if (network === 'clipboard') {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Rècords copiats al porta-retalls!");
+            }).catch(() => alert("No s'ha pogut copiar el text."));
+            return;
+        }
+
+        const encodedText = encodeURIComponent(text);
+        let url = "";
+
+        if (network === 'whatsapp') {
+            url = `https://api.whatsapp.com/send?text=${encodedText}`;
+        } else if (network === 'twitter') {
+            url = `https://twitter.com/intent/tweet?text=${encodedText}`;
+        } else if (network === 'telegram') {
+            url = `https://t.me/share/url?url=${encodeURIComponent(urlJoc)}&text=${encodeURIComponent(`He aconseguit aquests rècords a "A repartir sardanes!":\n🟢 A: ${scores.A} | 🟡 B: ${scores.B} | 🟠 C: ${scores.C} | 🔴 D: ${scores.D} | 💀 E: ${scores.E}\n\nSupera'm!`)}`;
+        }
+
+        if (url) window.open(url, '_blank');
+    }
+    window.shareScore = shareScore;
+
+    function copiarEnllacJoc(btn) {
+        const urlJoc = window.location.href.split('?')[0];
+        navigator.clipboard.writeText(urlJoc).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = "✅ Enllaç copiat!";
+            setTimeout(() => { btn.innerText = originalText; }, 2000);
+        }).catch(() => alert("No s'ha pogut copiar l'enllaç."));
+    }
+    window.copiarEnllacJoc = copiarEnllacJoc;
+
+    initProfile();
+
+    function showHelp() {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('help-title-normal').style.display = 'block';
+        document.getElementById('help-title-error').style.display = 'none';
+        document.getElementById('help-screen').style.display = 'block';
+        scrollToBottom();
+    }
+
+    function startGame(nivell) {
+        dificultat = nivell;
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+        puntuacio = 0;
+        updateScoreDisplay();
+        tempsRestant = TEMPS_LIMIT;
+        jocActiu = true;
+        faseC = 1;
+        
+        novaPregunta();
+        
+        document.getElementById('level-info').innerHTML = DESCRIPCIONS_NIVELL[dificultat];
+
+        timerInterval = setInterval(() => {
+            tempsRestant--;
+            document.getElementById('timer').innerText = tempsRestant + "s";
+            if (tempsRestant <= 0) endGame();
+        }, 1000);
+
+        scrollToBottom();
+    }
+
+    function mostrarDades(rTira, rPas, rmax, dificultat, següents) {
+        const dadesPreguntaHTML = 
+            `Tira: <strong>${rTira}</strong> | Pas: <strong>${rPas}</strong> | Portem: <strong>${rmax}</strong>`;
+        document.getElementById('dades-text').innerHTML = dadesPreguntaHTML;
+        
+        if (! (dificultat === 'C' || dificultat === 'D' || dificultat === 'E'))
+            return;
+        
+        if (següents !== undefined) {
+            puntuacio -= 2;
+            updateScoreDisplay();
+        }
+
+        const dades = document.getElementById('dades-text');
+
+        setTimeout(() => {
+
+            if (!jocActiu || faseC !== 1) return;
+
+            dades.innerHTML = `
+                <button onclick="mostrarDades(${rTira}, ${rPas}, ${rmax}, '${dificultat}', true)" style="
+                    width:100%;
+                    background:#4a4a4a;
+                    color:#ffcc00;
+                    border:1px solid #ffcc00;
+                    padding:12px;
+                    border-radius:8px;
+                    font-size:1rem;
+                ">
+                    👁️ Tornar a veure les dades (-2 punts)
+                </button>
+            `;
+
+        }, 3000);
+    }
+
+    function novaPregunta() {
+        clearHints();
+        if (!jocActiu) return;
+        faseC = 1;
+        document.getElementById('sub-task').style.display = 'none';
+
+        const isNivellA = (dificultat === 'A');
+        const modul = isNivellA ? 4 : 8;
+        
+        const rPas = Math.floor(Math.random() * modul) + 1;
+        
+        const minTira = 50, maxTira = 110;
+        const rTira = Math.floor(Math.random() * (maxTira - minTira + 1)) + minTira;
+        tiraActualValor = rTira;
+        const rmax = Math.floor(Math.random() * (rTira - 10 - rPas + 1)) + rPas;
+
+        const seguentCanvi = rmax + modul - rPas;
+        resultatCorrecteIndex = (rTira - seguentCanvi) % modul;
+        if (resultatCorrecteIndex < 0) resultatCorrecteIndex += modul;
+        if (resultatCorrecteIndex === 0) resultatCorrecteIndex = modul;
+        
+        valorDirCorrecte = rTira - ACABAMENTS[resultatCorrecteIndex][1];
+
+        document.getElementById('dades-text').style.visibility = 'visible';
+        mostrarDades(rTira, rPas, rmax, dificultat)
+        setupHints(rTira, rPas, rmax, modul);
+
+        let html = "";
+        const maxOpcions = isNivellA ? 4 : 8;
+        
+        let opcionsAmostrar = [];
+        for (let i = 1; i <= maxOpcions; i++) {
+            opcionsAmostrar.push({ index: i, nom: ACABAMENTS[i][0] });
+        }
+        
+        if (dificultat === 'E') {
+            opcionsAmostrar.sort(() => Math.random() - 0.5);
+        }
+        
+        for (let op of opcionsAmostrar) {
+            if (dificultat === 'E') {
+                html += `<div class="opcio" onclick="comprovaResposta(${op.index})">${op.nom}</div>`;
+            } else {
+                html += `<div class="opcio" onclick="comprovaResposta(${op.index})">${op.index} - ${op.nom}</div>`;
+            }
+        }
+        document.getElementById('opcions-list').innerHTML = html;
+        document.getElementById('feedback').innerText = "";
+        document.getElementById('feedback').style.color = "#e0e0e0";
+        if (dificultat === 'E') {
+            document.getElementById('helper-text').style.display = 'none';
+        } else {
+            document.getElementById('helper-text').style.display = 'block';
+            document.getElementById('helper-text').innerText = `Pots usar les tecles 1-${maxOpcions}`;
+        }
+    }
+
+    function comprovaResposta(intent) {
+        if (!jocActiu) return;
+
+        const feedbackEl = document.getElementById('feedback');
+        if (faseC === 1) {
+            if (parseInt(intent) === resultatCorrecteIndex) {
+                if (dificultat === 'D' || dificultat === 'E') {
+                    faseC = 2;
+                    feedbackEl.innerText = "Molt bé! Ara el compàs del canvi en el que diràs l'acabament:";
+                    feedbackEl.style.color = "#ffcc00";
+                    document.getElementById('sub-task').style.display = 'block';
+                    generaBotonsDir(valorDirCorrecte);
+                } else {
+                    puntuacio += 10;
+                    updateScoreDisplay();
+                    feedbackEl.innerText = "✨ Correcte! Punts: " + puntuacio;
+                    feedbackEl.style.color = "#00ff00";
+                    setTimeout(novaPregunta, 1000);
+                }
+            } else {
+                puntuacio -= 5;
+                updateScoreDisplay();
+                feedbackEl.innerText = "❌ Error! Era: " + ACABAMENTS[resultatCorrecteIndex][0] + " | Punts: " + puntuacio;
+                feedbackEl.style.color = "#ff4444";
+                if (puntuacio < -20) {
+                    cancelGame();
+                    return;
+                }
+                setTimeout(novaPregunta, 1200);
+            }
+        } else {
+            if (parseInt(intent) === valorDirCorrecte) {
+                puntuacio += 10;
+                updateScoreDisplay();
+                feedbackEl.innerText = "✨ Excel·lent! Punts: " + puntuacio;
+                feedbackEl.style.color = "#00ff00";
+            } else {
+                puntuacio -= 5;
+                updateScoreDisplay();
+                feedbackEl.innerText = "❌ Error! El valor era " + valorDirCorrecte + " | Punts: " + puntuacio;
+                feedbackEl.style.color = "#ff4444";
+                if (puntuacio < -20) {
+                    cancelGame();
+                    return;
+                }
+            }
+            setTimeout(novaPregunta, 1200);
+        }
+    }
+
+    function cancelGame() {
+        jocActiu = false;
+        clearInterval(timerInterval);
+
+        document.getElementById('game-screen').style.display = 'none';
+        document.getElementById('help-title-normal').style.display = 'none';
+        document.getElementById('help-title-error').style.display = 'block';
+        document.getElementById('help-screen').style.display = 'block';
+
+        scrollToBottom();
+    }
+
+    function generaBotonsDir(correcte) {
+        let html = '<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;">';
+        let botonsDir = [];
+        for (let v = tiraActualValor; v > tiraActualValor - 10; v--) {
+            botonsDir.push(v);
+        }
+        if (dificultat === 'E') {
+            let possiblesExtres = [];
+            for (let i = 1; i <= 5; i++) {
+                possiblesExtres.push(tiraActualValor + i);
+                possiblesExtres.push(tiraActualValor - 9 - i);
+            }
+            possiblesExtres.sort(() => Math.random() - 0.5);
+            botonsDir.push(...possiblesExtres.slice(0, 5));
+            botonsDir.sort((a, b) => b - a);
+        }
+        for (let v of botonsDir) {
+            html += `<button style="padding: 10px; font-size: 1rem;" onclick="comprovaResposta(${v})">${v}</button>`;
+        }
+        html += '</div>';
+        document.getElementById('opcions-list').innerHTML = html;
+    }
+
+    async function endGame() {
+        jocActiu = false;
+        clearInterval(timerInterval);
+        
+        const scores = getHighScores();
+        let isNewRecord = false;
+        if (puntuacio > (Number(scores[dificultat]) || 0)) {
+            scores[dificultat] = puntuacio;
+            saveHighScores(scores);
+            isNewRecord = true;
+        }
+
+        const activeProfile = getActiveProfile();
+        const nicknameActual = getNicknameComplet(activeProfile);
+        const comarcaActual = activeProfile.comarca || "Sense especificar";
+
+        const enviadaAlHallOfFame = await enviarPuntuacioGlobal(dificultat, nicknameActual, comarcaActual, puntuacio);
+
+        let htmlMsg = `<h2 style="color: #ffcc00; margin-top: 0; font-size: 1.8rem;">Temps Esgotat!</h2>`;
+        htmlMsg += `<p style="font-size: 1.2rem; color: #e0e0e0;">Has aconseguit <strong style="font-size: 1.5rem;">${puntuacio}</strong> punts.</p>`;
+        
+        if (isNewRecord) {
+            htmlMsg += `<p style="color: #00ff00; font-weight: bold; font-size: 1.1rem; margin: 15px 0;">🎉 NOU RÈCORD LOCAL (Nivell ${dificultat})! 🎉</p>`;
+        } else {
+            htmlMsg += `<p style="color: #aaa; font-size: 0.9rem; margin: 15px 0;">Rècord local actual (Nivell ${dificultat}): ${scores[dificultat]}</p>`;
+        }
+
+        if (enviadaAlHallOfFame) {
+            htmlMsg += `<div style="background: #2d2d2d; padding: 10px; border-radius: 5px;"><p style="color: #00ff00; margin: 0; font-size: 0.95rem;">🏆 Puntuació enviada al Top 100 com a:<br><strong style="color: #ffcc00;">${nicknameActual}</strong></p></div>`;
+        } else if (FIREBASE_ACTIU) {
+            htmlMsg += `<p style="color: #aaa; font-size: 0.9rem;">La teva puntuació no entra al Top 100 global.</p>`;
+        } else {
+            htmlMsg += `<p style="color: #ff4444; font-size: 0.9rem;">Mode local (no s'ha enviat al Top100 global).</p>`;
+        }
+        
+        document.getElementById('game-over-content').innerHTML = htmlMsg;
+        document.getElementById('game-screen').style.display = 'none';
+        document.getElementById('game-over-screen').style.display = 'block';
+    }
+
+    function setupHints(tira, pas, portem, modul) {
+        clearHints();
+
+        if (dificultat !== 'A' && dificultat !== 'B') return;
+
+        const properCanvi = portem + modul - pas;
+
+        const tiraMod = tira % modul || modul;
+
+        let canviMod = (portem - pas) % modul;
+        if (canviMod <= 0) canviMod += modul;
+
+        const resultat = resultatCorrecteIndex;
+
+        const dadesEl = document.getElementById('dades-text');
+
+        // Pista 1
+        hintTimeouts.push(setTimeout(() => {
+            dadesEl.innerHTML = `
+                <div style="margin-top:10px;color:#ffcc00;">
+                    💡 Tira ${tira}, proper canvi ${properCanvi}
+                </div>
+            `;
+        }, 5000));
+
+        // Pista 2
+        hintTimeouts.push(setTimeout(() => {
+            dadesEl.innerHTML = `
+                <div style="margin-top:5px;color:#ffcc00;">
+                    💡 Tira ${tira}, però anem ${canviMod} passos avançats
+                </div>
+            `;
+        }, 10000));
+
+        // Pista 3
+        hintTimeouts.push(setTimeout(() => {
+            dadesEl.innerHTML = `
+                <div style="margin-top:5px;color:#ffcc00;">
+                    💡A la tirada li sobrarien ${tiraMod} passos, tot i anar ${canviMod} passos avançats
+                </div>
+            `;
+        }, 15000));
+
+        // Pista 4
+        hintTimeouts.push(setTimeout(() => {
+            if (tiraMod < canviMod)
+            dadesEl.innerHTML = `
+                <div style="margin-top:5px;color:#00ff99;font-weight:bold;">
+                    💡 Estem més avançats ${canviMod} dels que sobrarien ${tiraMod}. Afegim 8 passos als que sobrarien i, restant, tenim que realment sobren ${resultat}.
+                </div>
+            `; else 
+            dadesEl.innerHTML = `
+                <div style="margin-top:5px;color:#00ff99;font-weight:bold;">
+                    💡 Si restem els avançats ${canviMod} dels que sobrarien ${tiraMod}, tenim els que realment sobren ${resultat}.
+                </div>
+            `;
+        }, 20000));
+    }
+
+    // Captura de teclat (dinàmica segons nivell)
+    window.addEventListener('keydown', (e) => {
+        if (dificultat === 'E') return;
+        const maxKey = (dificultat === 'A') ? '4' : '8';
+        if (jocActiu && e.key >= '1' && e.key <= maxKey) {
+            comprovaResposta(e.key);
+        }
+    });
+    // Exposem funcions perquè els atributs onclick del HTML funcionin amb script type="module".
+    window.showHelp = showHelp;
+    window.startGame = startGame;
+    window.comprovaResposta = comprovaResposta;
+    window.showHallOfFame = showHallOfFame;
+    window.hideHallOfFame = hideHallOfFame;
+    window.showProfiles = showProfiles;
+    window.hideProfiles = hideProfiles;
+    window.selectProfile = selectProfile;
+    window.deleteProfile = deleteProfile;
+    window.rollNewProfileNickname = rollNewProfileNickname;
+    window.createNewProfile = createNewProfile;
+    window.mostrarDades = mostrarDades;
+
+function mostrarAvisModeLocal() {
+    if (document.getElementById("local-mode-warning")) return;
+
+    const warning = document.createElement("div");
+    warning.id = "local-mode-warning";
+
+warning.innerHTML = `
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+    ">
+        <span style="font-size:0.85rem;">
+            ⚠️ Mode local activat · Top100 global desactivat
+        </span>
+
+        <button onclick="reobrirConsentiment()" style="
+            background:#00cc66;
+            color:white;
+            border:none;
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            font-size:1rem;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            padding:0;
+        " title="Activar serveis externs">
+            🍪
+        </button>
+    </div>
+`;
+    warning.style.background = "#5a3d00";
+    warning.style.color = "#ffcc00";
+    warning.style.padding = "10px";
+    warning.style.borderRadius = "8px";
+    warning.style.marginBottom = "15px";
+
+    document.getElementById("start-screen").prepend(warning);
+}
+function reobrirConsentiment() {
+    localStorage.removeItem("repartirCookieConsent");
+
+    const warning = document.getElementById("local-mode-warning");
+    if (warning) warning.remove();
+
+    showCookieBanner();
+}
+window.reobrirConsentiment = reobrirConsentiment;
+function retirarConsentiment() {
+    localStorage.removeItem("repartirCookieConsent");
+
+    alert(
+        "S'ha retirat el consentiment.\n\n" +
+        "L'aplicació es reiniciarà en mode local."
+    );
+
+    location.reload();
+}
+window.retirarConsentiment = retirarConsentiment;
+function abandonarPartida() {
+
+    if (!confirm("Vols abandonar la partida actual?")) {
+        return;
+    }
+
+    jocActiu = false;
+
+    clearInterval(timerInterval);
+        clearHints();
+
+        document.getElementById('game-screen').style.display = 'none';
+        document.getElementById('start-screen').style.display = 'block';
+}
+window.abandonarPartida = abandonarPartida;
+
+function tornarAlMenu() {
+    document.getElementById('help-screen').style.display = 'none';
+    document.getElementById('game-over-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
+    mostrarHighScores();
+}
+window.tornarAlMenu = tornarAlMenu;
+
+    if (getCookieConsent() === "rejected") {
+        mostrarAvisModeLocal();
+    }
+
+    // =====================================
+    // TEMA CLAR / FOSC
+    // =====================================
+    function toggleTheme() {
+        const body = document.body;
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            localStorage.setItem('repartirTheme', 'dark');
+            if (toggleBtn) toggleBtn.innerHTML = '🌞 Clar';
+        } else {
+            body.classList.add('light-mode');
+            localStorage.setItem('repartirTheme', 'light');
+            if (toggleBtn) toggleBtn.innerHTML = '🌙 Fosc';
+        }
+    }
+    window.toggleTheme = toggleTheme;
+
+    if (localStorage.getItem('repartirTheme') === 'light') {
+        document.body.classList.add('light-mode');
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (toggleBtn) toggleBtn.innerHTML = '🌙 Fosc';
+    }
+</script>
+</body>
+</html>
