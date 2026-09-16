@@ -6,8 +6,8 @@ services:
     volumes:
       - ./:/usr/share/nginx/html:ro
     networks:
-      - npm-network
+      - nginx-proxy-net
 
 networks:
-  npm-network:
+  nginx-proxy-net:
     external: true
